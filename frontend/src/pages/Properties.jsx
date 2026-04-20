@@ -9,7 +9,8 @@ const Properties = () => {
     // Fetch properties from backend
     const fetchProperties = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/properties');
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://azora-world.onrender.com';
+        const response = await fetch(`${apiUrl}/api/properties`);
         if (response.ok) {
           const data = await response.json();
           setProperties(data);
