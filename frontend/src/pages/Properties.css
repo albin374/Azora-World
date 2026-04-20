@@ -1,0 +1,148 @@
+.properties-page {
+  padding-top: 120px;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
+.properties-header {
+  margin-bottom: 5rem;
+}
+
+.properties-header h1 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.properties-header p {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.luxury-property-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  padding-bottom: 6rem;
+}
+
+.luxury-property-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.luxury-property-card:nth-child(even) {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.luxury-property-card:nth-child(even) .property-image-wrapper {
+  order: 2;
+}
+
+.property-image-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 500px;
+}
+
+.property-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.luxury-property-card:hover .property-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.property-price-tag {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: var(--gold-primary);
+  padding: 0.8rem 1.5rem;
+  font-weight: 500;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  border-left: 2px solid var(--gold-primary);
+}
+
+.property-details-wrapper {
+  padding: 2rem 0;
+}
+
+.property-details-wrapper h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.property-location-tag {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.property-desc {
+  color: #ccc;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 90%;
+}
+
+.luxury-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.luxury-amenities span {
+  color: #fff;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.luxury-amenities span::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--gold-primary);
+  border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+  .luxury-property-card, .luxury-property-card:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .luxury-property-card:nth-child(even) .property-image-wrapper {
+    order: 0;
+  }
+  
+  .property-image-wrapper {
+    height: 400px;
+  }
+  
+  .property-details-wrapper {
+    padding: 0;
+  }
+}
