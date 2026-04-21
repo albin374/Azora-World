@@ -247,8 +247,6 @@ const Home = () => {
                 value={price} onChange={setPrice} options={priceOptions}
                 openDropdown={openDropdown} setOpenDropdown={setOpenDropdown} 
               />
-            </div>
-            <div className="search-row search-row-2">
               <div className="bedrooms-strip">
                 <span className="beds-label">BEDROOMS</span>
                 <div className="beds-toggles">
@@ -263,10 +261,13 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-              <button className="search-action-btn">
-                <Search size={16} style={{marginRight: '8px'}} /> SEARCH PROPERTIES
-              </button>
             </div>
+          </div>
+          
+          <div className="text-center" style={{ marginTop: '2rem' }}>
+            <button className="search-action-btn" style={{ margin: '0 auto' }}>
+              <Search size={16} style={{marginRight: '8px'}} /> SEARCH PROPERTIES
+            </button>
           </div>
 
           <div className="search-footer">
