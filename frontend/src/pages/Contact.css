@@ -1,169 +1,189 @@
-.contact-page {
-  padding-top: 150px;
-  padding-bottom: 100px;
-  min-height: 100vh;
-  background-color: var(--bg-dark);
-}
+/* Editorial Contact Page Styles */
 
-.contact-container {
-  max-width: 1200px;
-}
-
-.contact-header {
-  text-align: center;
-  margin-bottom: 5rem;
-}
-
-.contact-header h1 {
-  font-size: clamp(3rem, 5vw, 4.5rem);
-  margin-bottom: 1rem;
-}
-
-.contact-header p {
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  background-color: var(--bg-card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-.contact-info-panel {
-  background-color: #111;
-  padding: 4rem 3rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-info-panel h3 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.contact-info-panel p {
-  color: var(--text-secondary);
-  margin-bottom: 3rem;
-  font-size: 1.05rem;
-}
-
-.info-items {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  flex: 1;
-}
-
-.info-item {
+.contact-hero {
+  height: 60vh;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  color: #fff;
-  font-size: 1.1rem;
+  justify-content: center;
 }
 
-.contact-icon {
-  color: var(--gold-primary);
+.contact-hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
 }
 
-.contact-socials {
+.contact-hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(28,26,23,0.7);
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--text-light);
+}
+
+/* Form Section */
+.form-container {
+  max-width: 900px;
+}
+
+.max-w-2xl {
+  max-width: 600px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-5 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.editorial-form {
   margin-top: 3rem;
-  display: flex;
-  gap: 1.5rem;
+  background: transparent;
 }
 
-.contact-socials a {
-  color: #fff;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.contact-socials a:hover {
-  color: var(--gold-primary);
-}
-
-/* Form Panel */
-.contact-form-panel {
-  padding: 4rem;
-}
-
-.luxury-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.form-group-row {
+.editorial-form .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+@media (min-width: 768px) {
+  .editorial-form .form-row {
+    grid-template-columns: 1fr 2fr 2fr;
+  }
+  .editorial-form .form-row.half {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.form-group label {
-  color: #fff;
-  font-size: 0.9rem;
-  font-family: var(--font-sans);
-  letter-spacing: 0.5px;
-}
-
-.form-group input, .form-group textarea {
+.editorial-form .form-group input,
+.editorial-form .form-group textarea,
+.editorial-form .form-group select {
+  width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-dark);
+  padding: 1rem 0;
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
   transition: var(--transition);
 }
 
-.form-group input:focus, .form-group textarea:focus {
-  outline: none;
-  border-bottom-color: var(--gold-primary);
-  box-shadow: none;
+.editorial-form .form-group input::placeholder,
+.editorial-form .form-group textarea::placeholder {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-.form-group input::placeholder, .form-group textarea::placeholder {
-  color: rgba(255,255,255,0.2);
+.editorial-form .form-group select {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 2px;
+  appearance: none;
+  cursor: pointer;
 }
 
-.submit-btn {
-  align-self: flex-start;
-  margin-top: 1rem;
-  padding: 1rem 3rem;
+.editorial-form .form-group input:focus,
+.editorial-form .form-group textarea:focus,
+.editorial-form .form-group select:focus {
+  border-color: var(--gold-primary);
 }
 
-@media (max-width: 992px) {
-  .contact-content {
-    grid-template-columns: 1fr;
-  }
-  .contact-info-panel {
-    padding: 3rem;
-  }
-  .contact-form-panel {
-    padding: 3rem;
+/* Presence Section */
+.presence-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+@media (min-width: 768px) {
+  .presence-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 576px) {
-  .form-group-row {
-    grid-template-columns: 1fr;
-  }
-  .contact-info-panel, .contact-form-panel {
-    padding: 2rem;
-  }
+.office-card {
+  background: var(--bg-primary);
+  padding-bottom: 3rem;
+}
+
+.office-img {
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: -3rem; /* overlap effect */
+  position: relative;
+  z-index: 1;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: var(--transition);
+}
+
+.office-card:hover .grayscale-hover {
+  filter: grayscale(0%);
+}
+
+.office-details {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-primary);
+  margin: 0 10%;
+  padding: 3rem 2rem 2rem;
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.office-details h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.contact-link:hover {
+  color: var(--gold-primary);
+}
+
+.contact-link svg {
+  color: var(--gold-primary);
 }

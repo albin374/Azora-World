@@ -3,15 +3,17 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
   padding: 1.5rem 0;
-  transition: var(--transition);
+  z-index: 1000;
+  transition: all 0.5s ease;
   background: transparent;
+  color: var(--text-light);
 }
 
 .navbar.scrolled {
+  background: var(--bg-dark);
   padding: 1rem 0;
-  background: transparent;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -20,47 +22,74 @@
   align-items: center;
 }
 
-.nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--text-primary);
+.nav-logo-area {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.nav-logo {
+  height: 60px;
+  object-fit: contain;
+  transition: var(--transition);
+}
+
+.navbar.scrolled .nav-logo {
+  height: 50px;
+}
+
+.nav-tagline {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  margin-top: 4px;
 }
 
 .nav-links {
   display: none;
 }
 
+@media (min-width: 992px) {
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+  }
+}
+
 .nav-links a {
-  margin: 0 1.5rem;
-  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: var(--text-light);
   position: relative;
 }
 
-.nav-links a:hover, .nav-links a.active {
-  color: var(--gold-primary);
+.navbar.scrolled .nav-links a,
+.navbar.scrolled .nav-actions .nav-phone {
+  color: var(--bg-primary);
+}
+
+.navbar.light-nav:not(.scrolled) .nav-links a,
+.navbar.light-nav:not(.scrolled) .nav-phone {
+  color: var(--text-primary);
 }
 
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -5px;
-  left: 50%;
+  bottom: -4px;
+  left: 0;
   width: 0;
   height: 1px;
   background-color: var(--gold-primary);
   transition: var(--transition);
-  transform: translateX(-50%);
 }
 
-.nav-links a:hover::after, .nav-links a.active::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 
@@ -68,62 +97,79 @@
   display: none;
 }
 
+@media (min-width: 992px) {
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.nav-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
 .mobile-toggle {
   display: block;
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1001;
+  color: var(--gold-primary);
 }
 
+@media (min-width: 992px) {
+  .mobile-toggle {
+    display: none;
+  }
+}
+
+/* Mobile Menu */
 .mobile-menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  background: var(--bg-dark);
-  z-index: 999;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--bg-dark);
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.open {
-  right: 0;
+  padding: 2rem 0;
+  max-height: 500px;
 }
 
 .mobile-links {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-.mobile-links a {
-  font-size: 1.5rem;
-  font-family: var(--font-serif);
+.mobile-links a:not(.btn) {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  color: var(--bg-primary);
 }
 
-.mobile-links a.active {
-  color: var(--gold-primary);
-}
-
-@media (min-width: 768px) {
-  .nav-links {
-    display: flex;
-    align-items: center;
-  }
-  .nav-actions {
-    display: block;
-  }
-  .mobile-toggle {
-    display: none;
-  }
-  .mobile-menu {
-    display: none;
-  }
+.mobile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-gold);
+  width: 80%;
 }

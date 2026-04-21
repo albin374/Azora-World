@@ -1,95 +1,195 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
 
 :root {
-  --bg-dark: #000000;
-  --bg-section: #050505;
-  --bg-card: #0a0a0a;
+  /* Color Palette */
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #FAF7F2;
+  --bg-dark: #1C1A17;
+  --bg-darker: #2A2318;
   
-  --text-primary: #ffffff;
-  --text-secondary: #999999;
+  --gold-primary: #C9A84C;
+  --gold-dark: #B8923A;
   
-  --gold-primary: #d4af37;
-  --white-btn-hover: #e0e0e0;
+  --text-primary: #1C1A17;
+  --text-secondary: #7A7060;
+  --text-light: #F5F0E8;
+  
+  --border-gold: rgba(180, 155, 100, 0.2);
+  --border-dark: rgba(28, 26, 23, 0.1);
 
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', sans-serif;
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'DM Sans', sans-serif;
   
-  --transition: all 0.3s ease;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Base Styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: default; /* We will implement custom cursor if needed, else auto */
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg-dark);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.9;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
+  font-weight: 300;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.hero-heading {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 300;
+}
+
+.subheading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 400;
-  letter-spacing: 0px;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold-primary);
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
 a {
   color: inherit;
   text-decoration: none;
   transition: var(--transition);
+  cursor: pointer;
 }
 
+p {
+  margin-bottom: 1.5rem;
+}
+
+/* Layout Utilities */
 .container {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 5%;
 }
 
-.text-gold { color: var(--gold-primary); }
-.text-center { text-align: center; }
+.section-padding {
+  padding: 100px 0;
+}
 
-/* Pure Pill Buttons */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-center { text-align: center; }
+.text-gold { color: var(--gold-primary); }
+
+/* Buttons */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.8rem 2.5rem;
   font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 2px;
   font-weight: 500;
-  font-size: 0.9rem;
   cursor: pointer;
-  border-radius: 50px;
-  border: 1px solid transparent;
   transition: var(--transition);
+  border: 1px solid transparent;
   background: transparent;
-  text-align: center;
 }
 
-.btn-white {
-  background-color: #ffffff;
-  color: #000000;
-}
-.btn-white:hover {
-  background-color: var(--white-btn-hover);
-  transform: translateY(-2px);
+.btn-gold-outline {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
 }
 
-.btn-outline {
-  border-color: rgba(255,255,255,0.3);
-  color: #ffffff;
+.btn-gold-outline:hover {
+  background-color: var(--gold-primary);
+  color: var(--bg-dark);
 }
-.btn-outline:hover {
-  border-color: #ffffff;
+
+.btn-solid-gold {
+  background-color: var(--gold-primary);
+  color: var(--bg-dark);
+}
+
+.btn-solid-gold:hover {
+  background-color: var(--gold-dark);
+}
+
+.btn-dark-outline {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.btn-dark-outline:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Dividers */
+.hairline-divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--border-gold);
+  margin: 2rem 0;
+}
+
+/* Image Utilities */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.fade-in {
-  animation: fadeIn 0.8s ease forwards;
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--gold-primary);
+  color: var(--bg-dark);
 }

@@ -1,70 +1,78 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
-  const location = useLocation();
-
   return (
-    <footer className="footer-area">
-      {location.pathname !== '/properties' && (
-        <div className="footer-cta" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000')" }}>
-          <div className="cta-overlay"></div>
-          <div className="cta-content container">
-            <h2>Grow Your Real Estate Portfolio with Us</h2>
-            <p>Partner with our team to access exclusive listings, investment insights, and personalized buying guidance.</p>
-            <Link to="/properties" className="btn btn-white">Explore Collections</Link>
-          </div>
-        </div>
-      )}
-
-      <div className="footer-main container">
-        <div className="footer-grid">
-          <div className="footer-col brand-col">
-            <h3 className="footer-logo">
-              <img src="/logo.jpg" alt="Azora World" style={{ height: '50px', objectFit: 'contain', marginRight: '15px' }} />
-              Azora World
-            </h3>
-            <p>Luxury Homes That Redefine Modern Living. Crafted with elegance, precision, and timeless design.</p>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-top">
+          
+          <div className="footer-brand">
+            <Link to="/" className="footer-logo">
+              <img src="/logo.jpg" alt="Azora World" style={{ height: '60px', filter: 'brightness(2)' }} />
+            </Link>
+            <p className="brand-desc">
+              Curating the world's most extraordinary properties. A legacy of luxury, distinction, and unparalleled service.
+            </p>
             <div className="social-links">
-              <a href="#">Fb</a>
-              <a href="#">Tw</a>
-              <a href="#">In</a>
+              <a href="#" className="social-icon">IG</a>
+              <a href="#" className="social-icon">FB</a>
+              <a href="#" className="social-icon">X</a>
+              <a href="#" className="social-icon">IN</a>
             </div>
           </div>
-          
-          <div className="footer-col">
-            <h4>Quick Links</h4>
+
+          <div className="footer-links">
+            <h4 className="footer-title">Explore</h4>
             <ul>
               <li><Link to="/">Home</Link></li>
+              <li><Link to="/properties">Our Properties</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/properties">Properties</Link></li>
               <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/properties">Off-Plan Developments</Link></li>
             </ul>
           </div>
 
-          <div className="footer-col">
-            <h4>Explore</h4>
+          <div className="footer-links">
+            <h4 className="footer-title">Services</h4>
             <ul>
-              <li><Link to="/properties">Featured Homes</Link></li>
-              <li><Link to="/properties">Popular Deals</Link></li>
-              <li><Link to="/properties">Investments</Link></li>
-              <li><Link to="/properties">Virtual Tours</Link></li>
+              <li><a href="#">Property Buying</a></li>
+              <li><a href="#">Property Selling</a></li>
+              <li><a href="#">Luxury Rentals</a></li>
+              <li><a href="#">Investment Advisory</a></li>
+              <li><a href="#">Concierge</a></li>
             </ul>
           </div>
 
-          <div className="footer-col newsletter-col">
-            <h4>Newsletter</h4>
-            <div className="newsletter-form">
-              <input type="email" placeholder="Enter your email" />
-              <button className="btn btn-white">Subscribe</button>
+          <div className="footer-contact">
+            <h4 className="footer-title">Get in Touch</h4>
+            <div className="contact-item">
+              <MapPin size={18} className="contact-icon" />
+              <p>Level 42, The Address Downtown,<br />Dubai, United Arab Emirates</p>
+            </div>
+            <div className="contact-item">
+              <Phone size={18} className="contact-icon" />
+              <p>+971 50 123 4567<br />+971 4 321 0000</p>
+            </div>
+            <div className="contact-item">
+              <Mail size={18} className="contact-icon" />
+              <p>enquiries@azoraworld.com</p>
             </div>
           </div>
+
         </div>
-        
+
+        <div className="hairline-divider"></div>
+
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Azora World. All Rights Reserved.</p>
-          <p>Luxury Location Lifestyle</p>
+          <p>&copy; {new Date().getFullYear()} Azora World. All Rights Reserved.</p>
+          <div className="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <span className="separator">·</span>
+            <a href="#">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>
