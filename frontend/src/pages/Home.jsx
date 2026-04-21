@@ -10,7 +10,7 @@ const heroSlides = [
     subtitle: 'Curated estates for the world\'s most discerning buyers'
   },
   {
-    image: 'https://images.unsplash.com/photo-1613490908677-7422dd819c9e?w=1920&q=80',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80',
     title: 'THE PINNACLE OF LUXURY',
     subtitle: 'Exclusive penthouses shaping the skyline'
   },
