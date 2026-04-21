@@ -96,6 +96,16 @@
   margin-top: 3px;
 }
 
+.footer-contact-link {
+  color: var(--text-secondary);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.footer-contact-link:hover {
+  color: var(--gold-primary);
+}
+
 .footer-bottom {
   display: flex;
   flex-direction: column;

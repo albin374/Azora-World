@@ -11,7 +11,7 @@ const Footer = () => {
           
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <img src="/logo.jpg" alt="Azora World" style={{ height: '60px', filter: 'brightness(2)' }} />
+              <img src="/logo.jpg" alt="Azora World" style={{ height: '110px', filter: 'brightness(2)' }} />
             </Link>
             <p className="brand-desc">
               Curating the world's most extraordinary properties. A legacy of luxury, distinction, and unparalleled service.
@@ -54,11 +54,16 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <Phone size={18} className="contact-icon" />
-              <p>+971 50 123 4567<br />+971 4 321 0000</p>
+              <p>
+                <a href="tel:+971501234567" className="footer-contact-link">+971 50 123 4567</a><br />
+                <a href="tel:+97143210000" className="footer-contact-link">+971 4 321 0000</a>
+              </p>
             </div>
             <div className="contact-item">
               <Mail size={18} className="contact-icon" />
-              <p>enquiries@azoraworld.com</p>
+              <p>
+                <a href="mailto:enquiries@azoraworld.com" target="_blank" rel="noopener noreferrer" className="footer-contact-link">enquiries@azoraworld.com</a>
+              </p>
             </div>
           </div>
 

@@ -9,7 +9,7 @@ const PropertyDetail = () => {
 
   return (
     <div className="property-detail-page fade-in">
-      
+
       {/* Hero Gallery */}
       <section className="detail-hero">
         <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Property Hero" className="hero-img" />
@@ -20,25 +20,25 @@ const PropertyDetail = () => {
       {/* Main Content Layout */}
       <section className="detail-content section-padding bg-primary">
         <div className="container detail-grid">
-          
+
           {/* Left Column - Details */}
           <div className="detail-main">
-            
+
             <div className="property-header">
               <div className="breadcrumb mb-5 mt-0">
-                <Link to="/">HOME</Link> <span className="mx-2">/</span> 
-                <Link to="/properties">PROPERTIES</Link> <span className="mx-2">/</span> 
+                <Link to="/">HOME</Link> <span className="mx-2">/</span>
+                <Link to="/properties">PROPERTIES</Link> <span className="mx-2">/</span>
                 <span className="text-gold">THE ROYAL ATLANTIS</span>
               </div>
 
               <span className="eyebrow">EXCLUSIVE PENTHOUSE</span>
               <h1 className="detail-heading mt-2">The Royal Atlantis Penthouse</h1>
-              <div className="loc text-secondary mt-2"><MapPin size={16}/> Palm Jumeirah, Dubai</div>
+              <div className="loc text-secondary mt-2"><MapPin size={16} /> Palm Jumeirah, Dubai</div>
 
               <div className="quick-stats mt-5">
-                <div className="stat"><Bed size={20}/> <span>5 Beds</span></div>
-                <div className="stat"><Bath size={20}/> <span>6 Baths</span></div>
-                <div className="stat"><Square size={20}/> <span>12,500 sqft</span></div>
+                <div className="stat"><Bed size={20} /> <span>5 Beds</span></div>
+                <div className="stat"><Bath size={20} /> <span>6 Baths</span></div>
+                <div className="stat"><Square size={20} /> <span>12,500 sqft</span></div>
               </div>
             </div>
 
@@ -59,12 +59,12 @@ const PropertyDetail = () => {
             <div className="amenities">
               <h3 className="section-title">Features & Amenities</h3>
               <div className="amenities-grid">
-                <div className="amenity-item"><Droplets size={20}/> Private Pool</div>
-                <div className="amenity-item"><Trees size={20}/> Beach Access</div>
-                <div className="amenity-item"><Dumbbell size={20}/> Private Gym</div>
-                <div className="amenity-item"><MonitorPlay size={20}/> Home Cinema</div>
-                <div className="amenity-item"><ShieldCheck size={20}/> 24/7 Security</div>
-                <div className="amenity-item"><CheckCircle2 size={20}/> Smart Home System</div>
+                <div className="amenity-item"><Droplets size={20} /> Private Pool</div>
+                <div className="amenity-item"><Trees size={20} /> Beach Access</div>
+                <div className="amenity-item"><Dumbbell size={20} /> Private Gym</div>
+                <div className="amenity-item"><MonitorPlay size={20} /> Home Cinema</div>
+                <div className="amenity-item"><ShieldCheck size={20} /> 24/7 Security</div>
+                <div className="amenity-item"><CheckCircle2 size={20} /> Smart Home System</div>
               </div>
             </div>
 
@@ -75,7 +75,7 @@ const PropertyDetail = () => {
               <div className="plan-box">
                 <img src="https://images.unsplash.com/photo-1600607688960-e095ff55baee?w=800&q=80" alt="Floor Plan" />
                 <div className="plan-overlay">
-                  <button className="btn btn-solid-gold"><Download size={14} className="mr-2"/> Download PDF</button>
+                  <button className="btn btn-solid-gold"><Download size={14} className="mr-2" /> Download PDF</button>
                 </div>
               </div>
             </div>
@@ -101,8 +101,8 @@ const PropertyDetail = () => {
                 <input type="tel" placeholder="Phone Number" required />
                 <input type="date" placeholder="Preferred Viewing Date" />
                 <textarea placeholder="Your Message" rows="3"></textarea>
-                
-                <button type="submit" className="btn btn-solid-gold w-100 mt-2 mb-2">Book a Viewing</button>
+
+                <button type="submit" className="btn btn-solid-gold w-100 mt-2 mb-2">view property page</button>
                 <button type="button" className="btn btn-dark-outline w-100">Send Enquiry</button>
               </form>
             </div>
@@ -117,8 +117,8 @@ const PropertyDetail = () => {
             </div>
 
             <div className="trust-badges">
-              <div className="t-badge"><CheckCircle2 size={16}/> Verified Property</div>
-              <div className="t-badge"><CheckCircle2 size={16}/> RERA Licensed</div>
+              <div className="t-badge"><CheckCircle2 size={16} /> Verified Property</div>
+              <div className="t-badge"><CheckCircle2 size={16} /> RERA Licensed</div>
             </div>
           </aside>
 
@@ -130,11 +130,11 @@ const PropertyDetail = () => {
         <div className="container text-center">
           <span className="eyebrow">EXPLORE MORE</span>
           <h2 className="subheading mb-5">Similar Properties</h2>
-          
+
           <div className="property-grid">
             {/* Reusing Home styles for quick mockup */}
             <div className="property-card">
-              <div className="property-img-wrapper" style={{height: '250px'}}>
+              <div className="property-img-wrapper" style={{ height: '250px' }}>
                 <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80" alt="Similar" className="img-cover" />
               </div>
               <div className="property-details">
@@ -143,9 +143,9 @@ const PropertyDetail = () => {
                 <div className="property-price">AED 18,200,000</div>
               </div>
             </div>
-            
+
             <div className="property-card">
-              <div className="property-img-wrapper" style={{height: '250px'}}>
+              <div className="property-img-wrapper" style={{ height: '250px' }}>
                 <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Similar" className="img-cover" />
               </div>
               <div className="property-details">
@@ -154,9 +154,9 @@ const PropertyDetail = () => {
                 <div className="property-price">AED 32,500,000</div>
               </div>
             </div>
-            
+
             <div className="property-card">
-              <div className="property-img-wrapper" style={{height: '250px'}}>
+              <div className="property-img-wrapper" style={{ height: '250px' }}>
                 <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80" alt="Similar" className="img-cover" />
               </div>
               <div className="property-details">

@@ -1,8 +1,28 @@
-import React from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { MapPin, Phone, Mail, Clock, ChevronDown } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [selectedInterest, setSelectedInterest] = useState("");
+  const selectRef = useRef(null);
+
+  const interestOptions = [
+    "Exclusive Acquisitions",
+    "Selling Portfolio",
+    "Luxury Rentals",
+    "Off-Market Opportunities"
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsSelectOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <div className="contact-luxury-page fade-in">
       
@@ -47,15 +67,35 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="form-row">
-              <div className="form-group select-wrapper">
-                <select required>
-                  <option value="" disabled selected>Area of Interest*</option>
-                  <option>Exclusive Acquisitions</option>
-                  <option>Selling Portfolio</option>
-                  <option>Luxury Rentals</option>
-                  <option>Off-Market Opportunities</option>
-                </select>
+            <div className="form-row full">
+              <div className="form-group select-wrapper" ref={selectRef}>
+                {/* Custom Select Box */}
+                <div 
+                  className={`custom-select-trigger ${isSelectOpen ? 'open' : ''} ${selectedInterest ? 'selected' : ''}`}
+                  onClick={() => setIsSelectOpen(!isSelectOpen)}
+                >
+                  <span>{selectedInterest || "Area of Interest*"}</span>
+                  <ChevronDown size={14} className="select-icon" />
+                </div>
+                
+                {/* Hidden actual input for form submission if needed */}
+                <input type="hidden" required value={selectedInterest} />
+                
+                {/* Custom Options Dropdown */}
+                <div className={`custom-select-options ${isSelectOpen ? 'show' : ''}`}>
+                  {interestOptions.map((opt) => (
+                    <div 
+                      key={opt} 
+                      className={`custom-option ${selectedInterest === opt ? 'active' : ''}`}
+                      onClick={() => {
+                        setSelectedInterest(opt);
+                        setIsSelectOpen(false);
+                      }}
+                    >
+                      {opt}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

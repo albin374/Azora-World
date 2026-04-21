@@ -10,7 +10,10 @@
 
 .contact-hero-bg {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80');
   background-size: cover;
   background-position: center;
@@ -19,8 +22,11 @@
 .contact-hero-bg::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(28,26,23,0.7);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 26, 23, 0.7);
 }
 
 .contact-hero-content {
@@ -64,14 +70,18 @@
   .editorial-form .form-row {
     grid-template-columns: 1fr 2fr 2fr;
   }
+
   .editorial-form .form-row.half {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .editorial-form .form-row.full {
+    grid-template-columns: 1fr;
   }
 }
 
 .editorial-form .form-group input,
-.editorial-form .form-group textarea,
-.editorial-form .form-group select {
+.editorial-form .form-group textarea {
   width: 100%;
   background: transparent;
   border: none;
@@ -92,19 +102,93 @@
   letter-spacing: 2px;
 }
 
-.editorial-form .form-group select {
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 2px;
-  appearance: none;
-  cursor: pointer;
+.editorial-form .form-group input:focus,
+.editorial-form .form-group textarea:focus {
+  border-color: var(--gold-primary);
 }
 
-.editorial-form .form-group input:focus,
-.editorial-form .form-group textarea:focus,
-.editorial-form .form-group select:focus {
+/* Custom Select / Dropdown */
+.select-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid var(--border-dark);
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.custom-select-trigger.selected {
+  color: var(--text-primary);
+}
+
+.custom-select-trigger:hover,
+.custom-select-trigger.open {
   border-color: var(--gold-primary);
+}
+
+.custom-select-trigger .select-icon {
+  color: var(--gold-primary);
+  transition: transform 0.3s ease;
+}
+
+.custom-select-trigger.open .select-icon {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-dark);
+  border-top: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.custom-select-options.show {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.custom-option {
+  padding: 1.2rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.custom-option:last-child {
+  border-bottom: none;
+}
+
+.custom-option:hover,
+.custom-option.active {
+  background: var(--gold-primary);
+  color: var(--bg-dark);
+  padding-left: 2rem;
 }
 
 /* Presence Section */
@@ -129,7 +213,7 @@
 .office-img {
   height: 400px;
   overflow: hidden;
-  margin-bottom: -3rem; /* overlap effect */
+  margin-bottom: -3rem;
   position: relative;
   z-index: 1;
   width: 80%;
@@ -153,7 +237,7 @@
   margin: 0 10%;
   padding: 3rem 2rem 2rem;
   border: 1px solid var(--border-dark);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .office-details h3 {

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ChevronLeft, MapPin, ArrowRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft, MapPin, ArrowRight, ChevronDown } from 'lucide-react';
 import './Home.css';
 
 const heroSlides = [
@@ -56,8 +56,53 @@ const galleryImages = [
   "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80"
 ];
 
+const SearchDropdown = ({ label, options, value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="search-field custom-dropdown" ref={dropdownRef}>
+      <label>{label}</label>
+      <div 
+        className={`dropdown-trigger ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{value}</span>
+        <ChevronDown size={14} className="dropdown-icon" />
+      </div>
+      <div className={`dropdown-options ${isOpen ? 'show' : ''}`}>
+        {options.map((opt) => (
+          <div 
+            key={opt}
+            className={`dropdown-option ${value === opt ? 'active' : ''}`}
+            onClick={() => {
+              onChange(opt);
+              setIsOpen(false);
+            }}
+          >
+            {opt}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [location, setLocation] = useState('Any Location');
+  const [propType, setPropType] = useState('All Types');
+  const [price, setPrice] = useState('Any Price');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -104,18 +149,24 @@ const Home = () => {
       <section className="search-bar-section">
         <div className="container">
           <div className="search-bar">
-            <div className="search-field">
-              <label>Location</label>
-              <select><option>Any Location</option><option>Dubai</option><option>Abu Dhabi</option></select>
-            </div>
-            <div className="search-field">
-              <label>Property Type</label>
-              <select><option>All Types</option><option>Villa</option><option>Penthouse</option></select>
-            </div>
-            <div className="search-field">
-              <label>Price Range</label>
-              <select><option>Any Price</option><option>Above AED 10M</option></select>
-            </div>
+            <SearchDropdown 
+              label="Location" 
+              value={location} 
+              onChange={setLocation} 
+              options={['Any Location', 'Dubai', 'Abu Dhabi']} 
+            />
+            <SearchDropdown 
+              label="Property Type" 
+              value={propType} 
+              onChange={setPropType} 
+              options={['All Types', 'Villa', 'Penthouse', 'Townhouse']} 
+            />
+            <SearchDropdown 
+              label="Price Range" 
+              value={price} 
+              onChange={setPrice} 
+              options={['Any Price', 'Above AED 10M', 'Above AED 20M']} 
+            />
             <button className="btn btn-solid-gold search-btn">Search Properties</button>
           </div>
         </div>
@@ -219,15 +270,15 @@ const Home = () => {
           <div className="amenities-grid-3">
             <div className="amenity-item">
               <h4>Unparalleled Comfort</h4>
-              <p>Meticulously maintained estates featuring premium bespoke furnishings and integrated climate control.</p>
+              <p>Meticulously maintained estates featuring premium bespoke furnishings, state-of-the-art home automation, and flawlessly integrated climate control systems to ensure total perfection.</p>
             </div>
             <div className="amenity-item">
               <h4>Ultimate Security</h4>
-              <p>Thorough health & safety standards paired with 24/7 private security details and smart surveillance.</p>
+              <p>Thorough health and safety standards paired with continuous 24/7 private security details, encrypted smart surveillance, and highly restricted biometric access for absolute peace of mind.</p>
             </div>
             <div className="amenity-item">
               <h4>Absolute Privacy</h4>
-              <p>Exclusive gated communities and private residences shielded from the public eye.</p>
+              <p>Exclusive gated communities and private, ultra-luxury residences meticulously positioned and shielded from the public eye to grant high-net-worth individuals total residential anonymity.</p>
             </div>
           </div>
         </div>

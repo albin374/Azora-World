@@ -139,6 +139,10 @@
   }
 }
 
+.search-field {
+  position: relative;
+}
+
 .search-field label {
   display: block;
   font-family: var(--font-sans);
@@ -149,16 +153,76 @@
   margin-bottom: 0.5rem;
 }
 
-.search-field select {
+.dropdown-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background: transparent;
-  border: none;
   border-bottom: 1px solid var(--border-gold);
   color: var(--text-light);
   font-family: var(--font-sans);
-  font-size: 14px;
-  padding: 0.5rem 0;
-  outline: none;
+  font-size: 13px;
+  padding: 0.5rem 0 1rem 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dropdown-trigger:hover,
+.dropdown-trigger.open {
+  border-color: var(--text-light);
+}
+
+.dropdown-trigger .dropdown-icon {
+  color: var(--gold-primary);
+  transition: transform 0.3s ease;
+}
+
+.dropdown-trigger.open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-gold);
+  border-top: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  margin-top: 1px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.dropdown-options.show {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.dropdown-option {
+  padding: 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.dropdown-option:last-child {
+  border-bottom: none;
+}
+
+.dropdown-option:hover,
+.dropdown-option.active {
+  background: var(--gold-primary);
+  color: var(--bg-dark);
+  padding-left: 1.8rem;
 }
 
 .search-btn {
@@ -524,6 +588,13 @@
   .amenities-grid-3 { grid-template-columns: repeat(3, 1fr); gap: 4rem; }
 }
 
+.amenities-grid-3 .amenity-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: justify;
+}
+
 .amenities-grid-3 .amenity-item h4 {
   color: var(--gold-primary);
   font-family: var(--font-serif);
@@ -535,6 +606,9 @@
   color: #ccc;
   font-size: 14px;
   line-height: 1.8;
+  text-align: justify;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 /* Newsletter Section */
