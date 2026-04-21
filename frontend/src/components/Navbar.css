@@ -1,5 +1,5 @@
 .navbar {
-  position: fixed;
+  position: absolute; /* No longer sticky on mobile */
   top: 0;
   left: 0;
   width: 100%;
@@ -8,6 +8,12 @@
   transition: all 0.5s ease;
   background: transparent;
   color: var(--text-light);
+}
+
+@media (min-width: 992px) {
+  .navbar {
+    position: fixed; /* Keep it sticky on desktop */
+  }
 }
 
 .navbar.scrolled {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ChevronLeft, MapPin, ArrowRight, ChevronDown } from 'lucide-react';
+import { ChevronRight, ChevronLeft, MapPin, ArrowRight, ChevronDown, Home as HomeIcon, CircleDollarSign, Search } from 'lucide-react';
 import './Home.css';
 
 const heroSlides = [
@@ -56,38 +56,49 @@ const galleryImages = [
   "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80"
 ];
 
-const SearchDropdown = ({ label, options, value, onChange }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const locationOptions = ['Any Location', 'Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Jumeirah Bay Island', 'Abu Dhabi'];
+const typeOptions = ['All Types', 'Penthouse', 'Villa', 'Apartment', 'Mansion', 'Townhouse'];
+const priceOptions = ['Any Price', 'AED 1M–5M', 'AED 5M–15M', 'AED 15M–50M', 'AED 50M+'];
+const bedOptions = ['Any', '1', '2', '3', '4', '5+'];
+
+const FilterBox = ({ id, label, icon: Icon, value, options, onChange, openDropdown, setOpenDropdown }) => {
+  const isOpen = openDropdown === id;
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+      if (isOpen && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdown(null);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    if (isOpen) document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isOpen, setOpenDropdown]);
 
   return (
-    <div className="search-field custom-dropdown" ref={dropdownRef}>
-      <label>{label}</label>
+    <div className={`filter-box ${isOpen ? 'active' : ''}`} ref={dropdownRef}>
       <div 
-        className={`dropdown-trigger ${isOpen ? 'open' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
+        className="filter-trigger"
+        onClick={() => setOpenDropdown(isOpen ? null : id)}
       >
-        <span>{value}</span>
-        <ChevronDown size={14} className="dropdown-icon" />
+        <div className="filter-label">
+          {Icon && <Icon size={12} className="f-icon" />}
+          {label}
+        </div>
+        <div className="filter-value">
+          <span>{value}</span>
+          <ChevronDown size={14} className={`f-chevron ${isOpen ? 'rotated' : ''}`} />
+        </div>
       </div>
-      <div className={`dropdown-options ${isOpen ? 'show' : ''}`}>
+      <div className={`filter-dropdown ${isOpen ? 'show' : ''}`}>
         {options.map((opt) => (
           <div 
             key={opt}
-            className={`dropdown-option ${value === opt ? 'active' : ''}`}
-            onClick={() => {
+            className={`filter-option ${value === opt ? 'selected' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
               onChange(opt);
-              setIsOpen(false);
+              setOpenDropdown(null);
             }}
           >
             {opt}
@@ -98,11 +109,75 @@ const SearchDropdown = ({ label, options, value, onChange }) => {
   );
 };
 
+const statsData = [
+  { val: 500, suffix: '+', desc: 'Properties' },
+  { val: 12, suffix: '', desc: 'Countries' },
+  { val: 2, prefix: 'AED ', suffix: 'B+', desc: 'Sold', isCompact: true },
+  { val: 24, suffix: '/7', desc: 'Concierge' }
+];
+
+const AnimatedCounter = ({ endValue, duration = 1800, suffix = '', prefix = '' }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const countRef = useRef(null);
+
+  useEffect(() => {
+    let observer;
+    if (countRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            let startTime = null;
+            const animate = (timestamp) => {
+              if (!startTime) startTime = timestamp;
+              const progress = timestamp - startTime;
+              // ease-out cubic
+              const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+              const percent = Math.min(progress / duration, 1);
+              setCount(Math.floor(endValue * easeOut(percent)));
+              if (percent < 1) {
+                window.requestAnimationFrame(animate);
+              } else {
+                setCount(endValue);
+              }
+            };
+            window.requestAnimationFrame(animate);
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(countRef.current);
+    }
+    return () => {
+      if (observer) observer.disconnect();
+    };
+  }, [hasAnimated, endValue, duration]);
+
+  return (
+    <span ref={countRef}>
+      {prefix && <span className="stat-prefix">{prefix}</span>}
+      {count}
+      {suffix && <span className="stat-suffix">{suffix}</span>}
+    </span>
+  );
+};
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [location, setLocation] = useState('Any Location');
   const [propType, setPropType] = useState('All Types');
   const [price, setPrice] = useState('Any Price');
+  const [beds, setBeds] = useState('Any');
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const handleClearFilters = () => {
+    setLocation('Any Location');
+    setPropType('All Types');
+    setPrice('Any Price');
+    setBeds('Any');
+    setOpenDropdown(null);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,28 +221,57 @@ const Home = () => {
       </section>
 
       {/* Property Search Bar */}
-      <section className="search-bar-section">
+      <section className="search-bar-section box-layout">
         <div className="container">
-          <div className="search-bar">
-            <SearchDropdown 
-              label="Location" 
-              value={location} 
-              onChange={setLocation} 
-              options={['Any Location', 'Dubai', 'Abu Dhabi']} 
-            />
-            <SearchDropdown 
-              label="Property Type" 
-              value={propType} 
-              onChange={setPropType} 
-              options={['All Types', 'Villa', 'Penthouse', 'Townhouse']} 
-            />
-            <SearchDropdown 
-              label="Price Range" 
-              value={price} 
-              onChange={setPrice} 
-              options={['Any Price', 'Above AED 10M', 'Above AED 20M']} 
-            />
-            <button className="btn btn-solid-gold search-btn">Search Properties</button>
+          <div className="search-eyebrow">
+            <div className="s-line"></div>
+            <span>Discover Luxury Properties</span>
+            <div className="s-line"></div>
+          </div>
+          <h2 className="search-heading">Find your <span className="muted-italic">perfect</span> residence</h2>
+
+          <div className="search-container">
+            <div className="search-row search-row-1">
+              <FilterBox 
+                id="location" label="LOCATION" icon={MapPin} 
+                value={location} onChange={setLocation} options={locationOptions}
+                openDropdown={openDropdown} setOpenDropdown={setOpenDropdown} 
+              />
+              <FilterBox 
+                id="type" label="PROPERTY TYPE" icon={HomeIcon} 
+                value={propType} onChange={setPropType} options={typeOptions}
+                openDropdown={openDropdown} setOpenDropdown={setOpenDropdown} 
+              />
+              <FilterBox 
+                id="price" label="PRICE RANGE" icon={CircleDollarSign} 
+                value={price} onChange={setPrice} options={priceOptions}
+                openDropdown={openDropdown} setOpenDropdown={setOpenDropdown} 
+              />
+            </div>
+            <div className="search-row search-row-2">
+              <div className="bedrooms-strip">
+                <span className="beds-label">BEDROOMS</span>
+                <div className="beds-toggles">
+                  {bedOptions.map(b => (
+                    <button 
+                      key={b} 
+                      className={`bed-toggle ${beds === b ? 'active' : ''}`}
+                      onClick={() => setBeds(b)}
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <button className="search-action-btn">
+                <Search size={16} style={{marginRight: '8px'}} /> SEARCH PROPERTIES
+              </button>
+            </div>
+          </div>
+
+          <div className="search-footer">
+            <div className="search-results-info">Showing <span className="gold-num">500+</span> properties available</div>
+            <button className="clear-filters-btn" onClick={handleClearFilters}>CLEAR FILTERS</button>
           </div>
         </div>
       </section>
@@ -285,24 +389,17 @@ const Home = () => {
       </section>
 
       {/* Statistics Section */}
-      <section className="stats-section section-padding bg-primary">
-        <div className="container stats-grid fade-up">
-          <div className="stat-block">
-            <div className="stat-num">500+</div>
-            <div className="stat-desc">Properties</div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-num">12</div>
-            <div className="stat-desc">Countries</div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-num">AED 2B+</div>
-            <div className="stat-desc">Sold</div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-num">24/7</div>
-            <div className="stat-desc">Concierge</div>
-          </div>
+      <section className="stats-section bg-primary">
+        <div className="stats-grid fade-up">
+          {statsData.map((stat, i) => (
+            <div className="stat-block" key={i} style={{ '--delay': `${i * 150}ms` }}>
+              <div className={`stat-num ${stat.isCompact ? 'compact-num' : ''}`}>
+                <AnimatedCounter endValue={stat.val} prefix={stat.prefix} suffix={stat.suffix} />
+              </div>
+              <div className="stat-desc">{stat.desc}</div>
+              {i !== statsData.length - 1 && <div className="stat-divider"></div>}
+            </div>
+          ))}
         </div>
       </section>
 
