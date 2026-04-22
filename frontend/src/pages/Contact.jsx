@@ -3,6 +3,9 @@ import { MapPin, Phone, Mail, Clock, ChevronDown } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Contact | Azora World Luxury Real Estate";
+  }, []);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [selectedInterest, setSelectedInterest] = useState("");
   const selectRef = useRef(null);

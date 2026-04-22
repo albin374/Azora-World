@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { MapPin, Bed, Bath, Square, Droplets, Dumbbell, MonitorPlay, Trees, ShieldCheck, Download, CheckCircle2 } from 'lucide-react';
 import './PropertyDetail.css';
@@ -31,6 +31,14 @@ const PropertyDetail = () => {
   const [activeTab, setActiveTab] = useState('BUY');
 
   const property = allProperties.find(p => p.id === Number(id)) || allProperties[0];
+
+  useEffect(() => {
+    if (property && property.title) {
+      document.title = `${property.title} | Azora World Luxury Real Estate`;
+    } else {
+      document.title = "Property Detail | Azora World Luxury Real Estate";
+    }
+  }, [property]);
 
   return (
     <div className="property-detail-page fade-in">

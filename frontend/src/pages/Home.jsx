@@ -164,6 +164,9 @@ const AnimatedCounter = ({ endValue, duration = 1800, suffix = '', prefix = '' }
 };
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Home | Azora World Luxury Real Estate";
+  }, []);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [location, setLocation] = useState('Any Location');
   const [propType, setPropType] = useState('All Types');

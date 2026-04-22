@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Target, Users, Shield, Award } from 'lucide-react';
 import './About.css';
 
 const About = () => {
+  useEffect(() => {
+    document.title = "About Us | Azora World Luxury Real Estate";
+  }, []);
   return (
     <div className="about-page fade-in">
       
