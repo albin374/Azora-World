@@ -3,16 +3,41 @@ import { useParams, Link } from 'react-router-dom';
 import { MapPin, Bed, Bath, Square, Droplets, Dumbbell, MonitorPlay, Trees, ShieldCheck, Download, CheckCircle2 } from 'lucide-react';
 import './PropertyDetail.css';
 
+const allProperties = [
+  {
+    id: 1, type: 'PENTHOUSE', title: 'The Royal Atlantis Penthouse', location: 'Palm Jumeirah, Dubai',
+    price: '45,000,000', beds: 5, baths: 6, area: '12,500 sqft',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80', badge: 'EXCLUSIVE PENTHOUSE'
+  },
+  {
+    id: 2, type: 'VILLA', title: 'Elysian Estate', location: 'Emirates Hills, Dubai',
+    price: '32,500,000', beds: 6, baths: 7, area: '15,000 sqft',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=80', badge: 'NEW VILLA'
+  },
+  {
+    id: 3, type: 'RESIDENCE', title: 'Burj Khalifa Signatures', location: 'Downtown Dubai',
+    price: '18,200,000', beds: 4, baths: 4, area: '5,800 sqft',
+    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1920&q=80', badge: 'FEATURED RESIDENCE'
+  },
+  {
+    id: 4, type: 'OFF-PLAN', title: 'Serenia Living', location: 'Palm Jumeirah, Dubai',
+    price: '50,000,000', beds: 5, baths: 6, area: '14,000 sqft',
+    image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=1920&q=80', badge: 'PREMIUM OFF-PLAN'
+  }
+];
+
 const PropertyDetail = () => {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState('BUY');
+
+  const property = allProperties.find(p => p.id === Number(id)) || allProperties[0];
 
   return (
     <div className="property-detail-page fade-in">
 
       {/* Hero Gallery */}
       <section className="detail-hero">
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Property Hero" className="hero-img" />
+        <img src={property.image} alt={property.title} className="hero-img" />
         <div className="hero-overlay"></div>
         <button className="btn btn-gold-outline view-gallery-btn">View All Photos</button>
       </section>
@@ -28,17 +53,17 @@ const PropertyDetail = () => {
               <div className="breadcrumb mb-5 mt-0">
                 <Link to="/">HOME</Link> <span className="mx-2">/</span>
                 <Link to="/properties">PROPERTIES</Link> <span className="mx-2">/</span>
-                <span className="text-gold">THE ROYAL ATLANTIS</span>
+                <span className="text-gold uppercase" style={{textTransform: 'uppercase'}}>{property.title}</span>
               </div>
 
-              <span className="eyebrow">EXCLUSIVE PENTHOUSE</span>
-              <h1 className="detail-heading mt-2">The Royal Atlantis Penthouse</h1>
-              <div className="loc text-secondary mt-2"><MapPin size={16} /> Palm Jumeirah, Dubai</div>
+              <span className="eyebrow">{property.badge}</span>
+              <h1 className="detail-heading mt-2">{property.title}</h1>
+              <div className="loc text-secondary mt-2"><MapPin size={16} /> {property.location}</div>
 
               <div className="quick-stats mt-5">
-                <div className="stat"><Bed size={20} /> <span>5 Beds</span></div>
-                <div className="stat"><Bath size={20} /> <span>6 Baths</span></div>
-                <div className="stat"><Square size={20} /> <span>12,500 sqft</span></div>
+                <div className="stat"><Bed size={20} /> <span>{property.beds} Beds</span></div>
+                <div className="stat"><Bath size={20} /> <span>{property.baths} Baths</span></div>
+                <div className="stat"><Square size={20} /> <span>{property.area}</span></div>
               </div>
             </div>
 
@@ -87,7 +112,7 @@ const PropertyDetail = () => {
             <div className="booking-panel">
               <div className="price-tag">
                 <span className="currency">AED</span>
-                <span className="amount">45,000,000</span>
+                <span className="amount">{property.price}</span>
               </div>
 
               <div className="purpose-tabs">
