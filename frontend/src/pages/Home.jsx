@@ -264,8 +264,8 @@ const Home = () => {
             </div>
           </div>
           
-          <div className="text-center" style={{ marginTop: '2rem' }}>
-            <button className="search-action-btn" style={{ margin: '0 auto' }}>
+          <div className="search-action-wrapper">
+            <button className="search-action-btn">
               <Search size={16} style={{marginRight: '8px'}} /> SEARCH PROPERTIES
             </button>
           </div>

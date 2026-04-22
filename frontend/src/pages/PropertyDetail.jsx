@@ -99,7 +99,12 @@ const PropertyDetail = () => {
                 <input type="text" placeholder="Full Name" required />
                 <input type="email" placeholder="Email Address" required />
                 <input type="tel" placeholder="Phone Number" required />
-                <input type="date" placeholder="Preferred Viewing Date" />
+                <input 
+                  type="text" 
+                  placeholder="Preferred Viewing Date" 
+                  onFocus={(e) => (e.target.type = "date")} 
+                  onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }} 
+                />
                 <textarea placeholder="Your Message" rows="3"></textarea>
 
                 <button type="submit" className="btn btn-solid-gold w-100 mt-2 mb-2">view property page</button>

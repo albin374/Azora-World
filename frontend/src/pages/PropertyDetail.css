@@ -199,7 +199,7 @@
 .enquiry-form textarea {
   width: 100%;
   padding: 1rem;
-  background: transparent;
+  background: var(--bg-primary);
   border: 1px solid var(--border-dark);
   margin-bottom: 1rem;
   font-family: var(--font-sans);
@@ -209,9 +209,16 @@
   transition: var(--transition);
 }
 
+.enquiry-form input::placeholder,
+.enquiry-form textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
 .enquiry-form input:focus,
 .enquiry-form textarea:focus {
   border-color: var(--gold-primary);
+  background: transparent;
 }
 
 .agent-card {

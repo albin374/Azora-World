@@ -344,6 +344,19 @@
   border-color: #C9A84C;
 }
 
+.search-action-wrapper {
+  margin-top: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .search-action-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .search-action-btn {
   background-color: #C9A84C;
   color: #1C1C1A;
