@@ -44,7 +44,7 @@ const Navbar = ({ theme, toggleTheme }) => {
             <Phone size={14} />
             <span>+971 50 123 4567</span>
           </div>
-          <Link to="/contact" className="btn btn-gold-outline">view property page</Link>
+          <Link to="/properties" className="btn btn-gold-outline">view property page</Link>
           <button className="theme-toggle desktop-theme-toggle" onClick={toggleTheme} aria-label="Toggle Dark Mode">
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
