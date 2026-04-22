@@ -99,11 +99,11 @@ const PropertyDetail = () => {
                 <input type="text" placeholder="Full Name" required />
                 <input type="email" placeholder="Email Address" required />
                 <input type="tel" placeholder="Phone Number" required />
-                <input 
-                  type="text" 
-                  placeholder="Preferred Viewing Date" 
-                  onFocus={(e) => (e.target.type = "date")} 
-                  onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }} 
+                <input
+                  type="text"
+                  placeholder="Date"
+                  onFocus={(e) => (e.target.type = "date")}
+                  onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                 />
                 <textarea placeholder="Your Message" rows="3"></textarea>
 
